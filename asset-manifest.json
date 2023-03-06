@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/kata-bowling-game/static/css/main.3f3f0764.css",
+    "main.js": "/kata-bowling-game/static/js/main.18d47ebd.js",
+    "index.html": "/kata-bowling-game/index.html",
+    "main.3f3f0764.css.map": "/kata-bowling-game/static/css/main.3f3f0764.css.map",
+    "main.18d47ebd.js.map": "/kata-bowling-game/static/js/main.18d47ebd.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3f3f0764.css",
+    "static/js/main.18d47ebd.js"
+  ]
+}
