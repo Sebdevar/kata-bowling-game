@@ -20,6 +20,7 @@ const StyledApp = styled.div`
 const StyledHeader = styled.header`
   font-size: calc(10px + 2vmin);
   color: white;
+  margin-bottom: 1em;
 `
 
 export default App;
