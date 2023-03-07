@@ -4,10 +4,10 @@ import Roll from "./Roll";
 
 type FrameProps = {
   frameNumber: number,
-  firstRoll?: number,
-  secondRoll?: number,
-  thirdRoll?: number,
-  score?: number
+  firstRoll?: number | null,
+  secondRoll?: number | null,
+  thirdRoll?: number | null,
+  score?: number | null
 };
 
 const Frame = (props: FrameProps) => {
@@ -18,11 +18,15 @@ const Frame = (props: FrameProps) => {
       {props.frameNumber}
       <Roll
         rollValue={props.firstRoll}
-        isFirstRoll={true}
+        displayStrike={props.firstRoll === 10}
       />
-      <Roll rollValue={props.secondRoll} />
+      <Roll
+        rollValue={props.secondRoll}
+        displaySpare={(props.firstRoll != null && props.secondRoll != null) &&
+          props.firstRoll + props.secondRoll === 10}
+      />
       {
-        isLastFrame && <Roll rollValue={props.thirdRoll} />
+        isLastFrame && <Roll rollValue={props.thirdRoll}/>
       }
       <Score>
         {props.score}
@@ -38,8 +42,8 @@ const StyledFrame = styled.div<{ isLastFrame: boolean }>`
   border-width: thin;
 
   display: grid;
-  grid-template: ${ props => {
-    return !props.isLastFrame 
+  grid-template: ${props => {
+    return !props.isLastFrame
             ? `". first-roll second-roll" 40% 
                "score score score" 60%
                / 1fr 1fr 1fr`

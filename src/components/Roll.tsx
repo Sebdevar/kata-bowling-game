@@ -2,18 +2,30 @@ import React from "react";
 import styled from "styled-components";
 
 type RollProps = {
-  rollValue?: number,
-  isFirstRoll?: boolean
+  rollValue?: number|null,
+  displayStrike?: boolean,
+  displaySpare?: boolean
 };
 
 const defaultProps = {
-  isFirstRoll: false
+  displayStrike: false,
+  displaySpare: false
 }
 
 const Roll = (props: RollProps) => {
+  const getVisualOutput = () => {
+    if (props.displayStrike) {
+      return "X";
+    }
+    if (props.displaySpare) {
+      return "/";
+    }
+    return props.rollValue
+  }
+
   return (
     <StyledRoll>
-      {props.rollValue}
+      { getVisualOutput() }
     </StyledRoll>
   )
 }

@@ -2,17 +2,23 @@ import React from "react";
 import Frame from "./Frame";
 import styled from "styled-components";
 
-const PlayerRow = () => (<StyledPlayerRow>
-    <Frame frameNumber={1}/>
-    <Frame frameNumber={2}/>
-    <Frame frameNumber={3}/>
-    <Frame frameNumber={4}/>
-    <Frame frameNumber={5}/>
-    <Frame frameNumber={6}/>
-    <Frame frameNumber={7}/>
-    <Frame frameNumber={8}/>
-    <Frame frameNumber={9}/>
-    <Frame frameNumber={10}/>
+type PlayerRowProps = {
+  rolls: Array<Array<number | null>>
+}
+
+const PlayerRow = (props: PlayerRowProps) => (
+  <StyledPlayerRow>
+    {
+      props.rolls.map((frame, index) => (
+        <Frame
+          key={"frame" + index}
+          frameNumber={index + 1}
+          firstRoll={frame[0]}
+          secondRoll={frame[1]}
+          thirdRoll={frame[2]}
+        />
+      ))
+    }
   </StyledPlayerRow>
 )
 
