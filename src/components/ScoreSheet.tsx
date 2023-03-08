@@ -13,24 +13,28 @@ const getNullRollsArray = () => {
 }
 
 const ScoreSheet = () => {
-  const [currentFrameIndex, setCurrentFrameIndex] = useState(0);
-  const [currentRollIndex, setCurrentRollIndex] = useState(0);
+  const [currentPosition, setCurrentPosition] = useState({frame: 0, roll: 0})
   const [rolls, setRolls] = useState(getNullRollsArray());
 
   const handleAddRoll = useCallback((numberOfPins: number) => {
     setRolls(prevState => {
       const newRolls = [...prevState];
-      newRolls[currentFrameIndex][currentRollIndex] = numberOfPins;
+      newRolls[currentPosition.frame][currentPosition.roll] = numberOfPins;
       return newRolls;
     });
 
-    if ((currentRollIndex >= 1 || numberOfPins === 10) && currentFrameIndex < 9) {
-      setCurrentFrameIndex(currentFrameIndex + 1);
-      setCurrentRollIndex(0);
+    if ((currentPosition.roll >= 1 || numberOfPins === 10) && currentPosition.frame < 9) {
+      setCurrentPosition({
+        frame: currentPosition.frame + 1,
+        roll: 0
+      });
     } else {
-      setCurrentRollIndex(currentRollIndex + 1);
+      setCurrentPosition({
+        ...currentPosition,
+        roll: currentPosition.roll + 1
+      })
     }
-  }, [currentFrameIndex, currentRollIndex]);
+  }, [currentPosition]);
 
   return (
     <StyledScoreSheet>
