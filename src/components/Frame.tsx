@@ -55,22 +55,21 @@ const StyledFrame = styled.div<{ isLastFrame: boolean }>`
   border-width: thin;
 
   display: grid;
-  grid-template: ${props => {
-    return !props.isLastFrame
-            ? `". first-roll second-roll" 40% 
+  grid-template: ${props => !props.isLastFrame
+          ? `". first-roll second-roll" 40% 
                "score score score" 60%
                / 1fr 1fr 1fr`
-            : `". first-roll second-roll third-roll" 40%
+          : `". first-roll second-roll third-roll" 40%
                "score score score score" 60%
-               / .66fr 1fr 1fr 1fr;`
-  }}
+               / .66fr 1fr 1fr 1fr;`}
 `
 
 const Score = styled.div`
-  grid-column: span 3;
+  grid-area: score;
   width: 100%;
   margin: auto;
   font-size: 2rem;
 `
+
 
 export default Frame;
