@@ -1,26 +1,34 @@
 import React from "react";
 import Frame from "./Frame";
 import styled from "styled-components";
+import {usePlayerScore} from "../providers/PlayerScore";
 
-type PlayerRowProps = {
-  rolls: Array<Array<number | null>>
+const PlayerRow = () => {
+  const playerScore = usePlayerScore();
+
+  return (
+    <StyledPlayerRow>
+      {
+        playerScore.frames.map((frame, index) => {
+          const showScore = (index < playerScore.currentFrame
+              || playerScore.frames[playerScore.currentFrame].isLastFrame)
+            && frame.bonusPointsTicker === 0;
+          return (
+            <Frame
+              key={"frame" + index}
+              frameNumber={index + 1}
+              isLastFrame={frame.isLastFrame}
+              firstRoll={frame.rolls[0]}
+              secondRoll={frame.rolls[1]}
+              thirdRoll={frame.rolls[2]}
+              score={showScore ? frame.score : null}
+            />
+          );
+        })
+      }
+    </StyledPlayerRow>
+  )
 }
-
-const PlayerRow = (props: PlayerRowProps) => (
-  <StyledPlayerRow>
-    {
-      props.rolls.map((frame, index) => (
-        <Frame
-          key={"frame" + index}
-          frameNumber={index + 1}
-          firstRoll={frame[0]}
-          secondRoll={frame[1]}
-          thirdRoll={frame[2]}
-        />
-      ))
-    }
-  </StyledPlayerRow>
-)
 
 const StyledPlayerRow = styled.div`
   display: grid;

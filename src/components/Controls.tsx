@@ -1,12 +1,10 @@
 import React, {memo, SyntheticEvent, useState} from "react";
 import styled from "styled-components";
+import {useAddRoll} from "../providers/PlayerScore";
 
-type ControlsProps = {
-  onAddRoll: Function
-}
-
-const Controls = memo((props: ControlsProps) => {
+const Controls = memo(() => {
   const [pinCount, setPinCount] = useState(0)
+  const addRoll = useAddRoll();
 
   const handlePinCountChange = (event: SyntheticEvent) => {
     const element = event.target as HTMLInputElement;
@@ -21,7 +19,7 @@ const Controls = memo((props: ControlsProps) => {
   }
 
   const handleSubmit = () => {
-    props.onAddRoll(pinCount);
+    addRoll(pinCount);
   }
 
   return (

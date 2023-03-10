@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import styled from "styled-components";
 import Roll from "./Roll";
 
 type FrameProps = {
   frameNumber: number,
+  isLastFrame: boolean,
   firstRoll?: number | null,
   secondRoll?: number | null,
   thirdRoll?: number | null,
@@ -11,28 +12,40 @@ type FrameProps = {
 };
 
 const Frame = (props: FrameProps) => {
-  const [isLastFrame] = useState(props.frameNumber === 10);
+  const firstRollIsStrike = props.firstRoll === 10;
+
+  const secondRollIsStrike = props.isLastFrame && firstRollIsStrike && props.secondRoll === 10;
+  const secondRollIsSpare = !secondRollIsStrike && !firstRollIsStrike && props.firstRoll! + props.secondRoll! === 10;
+
+  const thirdRollIsStrike = (secondRollIsStrike || secondRollIsSpare) && props.thirdRoll === 10;
+  const thirdRollIsSpare = !thirdRollIsStrike && !secondRollIsStrike && !secondRollIsSpare &&
+    props.secondRoll! + props.thirdRoll! === 10;
 
   return (
-    <StyledFrame isLastFrame={isLastFrame}>
+    <StyledFrame isLastFrame={props.isLastFrame}>
       {props.frameNumber}
       <Roll
         rollValue={props.firstRoll}
-        displayStrike={props.firstRoll === 10}
+        displayStrike={firstRollIsStrike}
       />
       <Roll
         rollValue={props.secondRoll}
-        displaySpare={(props.firstRoll != null && props.secondRoll != null) &&
-          props.firstRoll + props.secondRoll === 10}
+        displayStrike={secondRollIsStrike}
+        displaySpare={secondRollIsSpare}
       />
       {
-        isLastFrame && <Roll rollValue={props.thirdRoll}/>
+        props.isLastFrame &&
+          <Roll
+              rollValue={props.thirdRoll}
+              displayStrike={thirdRollIsStrike}
+              displaySpare={thirdRollIsSpare}
+          />
       }
       <Score>
         {props.score}
       </Score>
     </StyledFrame>
-  );
+  )
 }
 
 const StyledFrame = styled.div<{ isLastFrame: boolean }>`
