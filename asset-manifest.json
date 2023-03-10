@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/kata-bowling-game/static/css/main.e6c13ad2.css",
-    "main.js": "/kata-bowling-game/static/js/main.3a4f9dd6.js",
+    "main.js": "/kata-bowling-game/static/js/main.ecc4cf3d.js",
     "index.html": "/kata-bowling-game/index.html",
     "main.e6c13ad2.css.map": "/kata-bowling-game/static/css/main.e6c13ad2.css.map",
-    "main.3a4f9dd6.js.map": "/kata-bowling-game/static/js/main.3a4f9dd6.js.map"
+    "main.ecc4cf3d.js.map": "/kata-bowling-game/static/js/main.ecc4cf3d.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.3a4f9dd6.js"
+    "static/js/main.ecc4cf3d.js"
   ]
 }
